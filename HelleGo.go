@@ -37,17 +37,17 @@ func process(inputChan <-chan string, userid string) {
 		reqData := &requestBody{
 			Key: "792bcf45156d488c92e9d11da494b085",
 			Info: input,
-			UserId: userid
+			UserId: userid,
 		}
 		// 转义为json
-		byteData,	:= json.Marshal(&reqData)
+		byteData, _ := json.Marshal(&reqData)
 		// 请求聊天机器人接口
 		req, err := http.NewRequest("POST",
 			"http://www.tuling123.com/openapi/api",
 			bytes.NewReader(byteData))
 		req.Header.Set("Content-Type", "application/json;charset=UTF-8")
 		client := http.Client{}
-		resp, err := clent.Do(req)
+		resp, err := client.Do(req)
 		if err != nil {
 			fmt.Println("Network Error!")
 		}else {
